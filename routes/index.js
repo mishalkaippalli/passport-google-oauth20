@@ -19,7 +19,7 @@ router.get('/auth/google',
   }));
 
   router.get('/auth/protected', (req, res) => {
-    let name = req.user.displayName;
+    let name = req.Profile.displayName;
     res.send(`hello ${name}`)
   });
 

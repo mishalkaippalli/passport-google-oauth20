@@ -1,5 +1,6 @@
 const passport = require('passport');
 const session = require("express-session")
+const User = require("../model.js")
 
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -10,9 +11,10 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true,
   },
   function(req, accessToken, refreshToken, profile, done) {
-    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    //   return cb(err, user);
-    // });
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      console.log(user)
+      return done(err, user);
+    });
     console.log('Access Token:', accessToken);
     console.log('Refresh Token:', refreshToken);
     console.log('Profile:', profile);
